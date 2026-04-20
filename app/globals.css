@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-chakra: 'Chakra Petch', sans-serif;
+  --prison-orange: #ff6b1a;
+  --prison-red: #dc2626;
+  --prison-dark: #080808;
+  --prison-card: #111111;
+  --prison-border: #2a2a2a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-chakra), 'Courier New', monospace;
+  background: var(--prison-dark);
+  overflow-x: hidden;
+}
+
+.font-mono-game {
+  font-family: 'Courier New', 'Lucida Console', monospace;
+  letter-spacing: 0.02em;
+}
+
+/* Scanline effect */
+.scanlines::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Glitch text */
+@keyframes glitch {
+  0% { text-shadow: 2px 0 #ff6b1a, -2px 0 #3b82f6; }
+  25% { text-shadow: -2px 0 #ff6b1a, 2px 0 #3b82f6; }
+  50% { text-shadow: 2px 2px #ff6b1a, -2px -2px #3b82f6; }
+  75% { text-shadow: -2px 2px #ff6b1a, 2px -2px #3b82f6; }
+  100% { text-shadow: 2px 0 #ff6b1a, -2px 0 #3b82f6; }
+}
+
+.glitch-text {
+  animation: glitch 3s infinite;
+}
+
+@keyframes pulse-border {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 26, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 107, 26, 0); }
+}
+
+.pulse-orange {
+  animation: pulse-border 2s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+  97% { opacity: 1; }
+}
+
+.flicker {
+  animation: flicker 4s infinite;
+}
+
+/* Game cell card hover */
+.cell-card {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.cell-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 107, 26, 0.15);
+}
+
+/* Timer warning */
+@keyframes timer-warning {
+  0%, 100% { color: #ef4444; }
+  50% { color: #fca5a5; }
+}
+
+.timer-warning {
+  animation: timer-warning 0.5s infinite;
+}
+
+/* Completion flash */
+@keyframes success-flash {
+  0% { background: rgba(34, 197, 94, 0); }
+  30% { background: rgba(34, 197, 94, 0.2); }
+  100% { background: rgba(34, 197, 94, 0); }
+}
+
+.success-flash {
+  animation: success-flash 0.6s ease-out;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #ff6b1a; }
